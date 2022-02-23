@@ -58,11 +58,12 @@ Actual performance drops down, therefore models infact prefer using raw datetime
 
 Light BGM model tuning. 
 In the initial training Light BGM showed best performance. Therefore sample hyperparameters tuning for this model was performed. Changed parameter was feature_fraction which describe percentage of features used for each tree. Lowering this parameter might  improve training speed and decrease overfitting.
-|   |model         |time_limit  |hyperparameters                        |score    |
+|Idx|model         |time_limit  |hyperparameters                        |score    |
 |:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         | feature_fraction = 1.0 (default)      |0.56439  |
 |1  |add_features  |200         | feature_fraction = 0.75               |0.58717  |
 |2  |add_features  |200         | feature_fraction = 0.5                |0.64645  |
+
 Conclusion: Hyperparameter feature_fraction should be left on default value 1.0 in order to reach best performance. 
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
