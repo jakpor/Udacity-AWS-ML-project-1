@@ -32,25 +32,28 @@ Moreover I would apply the training using actual metric for the data evaluation 
 I have divided performed experiments into three groups: obligatory table, learning time and further tuning.
 
 Mandatory models results
-|   |model        |eval_metric             |time_limit  |hyperparameters                        |score    |
+|Idx|model        |eval_metric             |time_limit  |hyperparameters                        |score    |
 |:-:|-------------|------------------------|:----------:|---------------------------------------|---------|
 |0  |initial      |root_mean_squared_error |600         |default                                |1.39525  |
 |1  |add_features |root_mean_squared_error |600         |default                                |0.47600  |
 |2  |hpo          |root_mean_squared_error |600         |multimodal, 'batch_size':200,'lr':4    |0.57255  |
 
 Impact of different time limits
-|   |model         |time_limit  |hyperparameters                        |score    |
+
+|Idx|model         |time_limit  |hyperparameters                        |score    |
 |:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         |default                                |0.48903  |
 |1  |add_features  |400         |default                                |0.48311  |
 |2  |add_features  |600         |default                                |0.48056  |
+
 Conclusion: for coarse parameter tuning shorter learning time can be selected.
 
 Feature importance. Trained data seems to rely strongy on the 'datetime' column even when the 'hour', 'day' etc. features are avaiable. What will happen if we disable 'datetime' column?
-|   |model         |time_limit  |hyperparameters                        |score    |
+|Idx|model         |time_limit  |hyperparameters                        |score    |
 |:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         |with 'datetime'                        |0.48903  |
 |1  |add_features  |200         |without 'datetime'                     |0.55039  |
+
 Actual performance drops down, therefore models infact prefer using raw datetime format for some cases.
 
 Light BGM model tuning. 
