@@ -33,12 +33,14 @@ I have divided performed experiments into three groups: obligatory table, learni
 
 Mandatory models results
 |   |model        |eval_metric             |time_limit  |hyperparameters                        |score    |
+|:-:|-------------|------------------------|:----------:|---------------------------------------|---------|
 |0  |initial      |root_mean_squared_error |600         |default                                |1.39525  |
 |1  |add_features |root_mean_squared_error |600         |default                                |0.47600  |
 |2  |hpo          |root_mean_squared_error |600         |multimodal, 'batch_size':200,'lr':4    |0.57255  |
 
 Impact of different time limits
 |   |model         |time_limit  |hyperparameters                        |score    |
+|:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         |default                                |0.48903  |
 |1  |add_features  |400         |default                                |0.48311  |
 |2  |add_features  |600         |default                                |0.48056  |
@@ -46,6 +48,7 @@ Conclusion: for coarse parameter tuning shorter learning time can be selected.
 
 Feature importance. Trained data seems to rely strongy on the 'datetime' column even when the 'hour', 'day' etc. features are avaiable. What will happen if we disable 'datetime' column?
 |   |model         |time_limit  |hyperparameters                        |score    |
+|:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         |with 'datetime'                        |0.48903  |
 |1  |add_features  |200         |without 'datetime'                     |0.55039  |
 Actual performance drops down, therefore models infact prefer using raw datetime format for some cases.
@@ -53,19 +56,17 @@ Actual performance drops down, therefore models infact prefer using raw datetime
 Light BGM model tuning. 
 In the initial training Light BGM showed best performance. Therefore sample hyperparameters tuning for this model was performed. Changed parameter was feature_fraction which describe percentage of features used for each tree. Lowering this parameter might  improve training speed and decrease overfitting.
 |   |model         |time_limit  |hyperparameters                        |score    |
+|:-:|--------------|:----------:|---------------------------------------|---------|
 |0  |add_features  |200         | feature_fraction = 1.0 (default)      |0.56439  |
 |1  |add_features  |200         | feature_fraction = 0.75               |0.58717  |
 |2  |add_features  |200         | feature_fraction = 0.5                |0.64645  |
 Conclusion: Hyperparameter feature_fraction should be left on default value 1.0 in order to reach best performance. 
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
-
-![model_train_score.png](img/model_train_score.png)
+<img src="img/model_train_score.png" alt="model_train_score.png" width="500"/>
 
 ### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
-
-
-![model_test_score.png](img/model_test_score.png)
+<img src="img/model_test_score.png" alt="model_test_score.png" width="500"/>
 
 ## Summary
 My top ranged model was a model with default hyperparameters and added new features. This result is probably caused by lack of knowledge in hyperparameters tuning. Hyperparameter tuning showed that learning time can be decreased for coarse hyperparameter tuning. The best performing model was Autogluon Weigted Enseble model followed by Cat Boost, Extra trees and Light BGM models. Addition of new features to the model improved performance of prediction significantly. 
